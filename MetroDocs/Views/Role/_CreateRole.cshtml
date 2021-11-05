@@ -1,0 +1,9 @@
+﻿@using MetroDocs.Models;
+@model CreateRole
+@using (Html.BeginForm("SaveRole", "Role", FormMethod.Post))
+{
+    @Html.TextBoxFor(m => m.RoleName)
+    @Html.DisplayFor(m => m.RoleName)
+    @Html.ValidationMessageFor(m => m.RoleName)
+    <input type="submit" value="Create Role" class="btn btn-success btn-sm" />
+}

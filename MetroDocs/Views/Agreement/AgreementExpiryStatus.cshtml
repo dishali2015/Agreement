@@ -1,0 +1,407 @@
+﻿
+@{
+    ViewBag.Title = "Agreement Expiry Status";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h5>Agreement Expiry Status</h5>
+
+<style>
+    input.form-control {
+        max-width:150px;
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12 text-center">
+        @foreach (var item in ViewBag.reportOption)
+        {
+            if (item.Value == "All")
+            {
+                <div class="form-check form-check-inline">
+                    <input type="checkbox" value="@item.Value" name="filteroption" class="filteroptionall" />
+                    <label class="form-check-label p-1">@item.Text</label>
+                </div>
+            }
+            else
+            {
+                <div class="form-check form-check-inline">
+                    <input type="checkbox" value="@item.Value" name="filteroption" class="filteroption" />
+                    <label class="form-check-label p-1" for="@item.Value" >@item.Text</label>
+                </div>
+            }
+        }
+        <div class="form-check form-check-inline">
+            <input type="button" value="Report" class="btn btn-success" onclick="return AssignValue()" />
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div id="divagreementlist" class="col-md-12 col-lg-12 mr-5" style="height:350px;overflow:auto;">
+
+    </div>
+</div>
+
+<div class="modal fade" id="DocumentModal" tabindex="-1" role="dialog" aria-labelledby="documentModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="documentModalLabel">List of Document</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="DocumentUploadList">
+
+                </div>
+                <div id="divfilenotfound" class="text-danger float-left">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="Agreementrenewal" tabindex="-1" role="dialog" aria-labelledby="documentModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header p-1 bg-danger text-white">
+                <h5 class="modal-title" id="documentModalLabel">Agreement Renewal</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body p-1">
+                <div id="divdisplayAgreementInfo">
+
+                </div>               
+            </div>
+            
+        </div>
+    </div>
+</div>
+<div id="wait" style="display: none; width: 100%; height: 100%; top: 100px; left: 0px; position: fixed; z-index: 10000; text-align: center;">
+    <img src='@Url.Content("~/Content/images/ConventionalOblongFairybluebird-small.gif")' width="200" height="200" alt="Loading..." style="position: fixed; top: 50%; left: 50%;" />
+</div>
+@section scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(document).ajaxStart(function () {
+                $('#wait').show();
+            });
+            $(document).ajaxStop(function () {
+                $('#wait').hide();
+            });
+            $(document).ajaxError(function () {
+                $('#wait').hide();
+            });
+            $(document).on('click', '.nav-item', function (e) {
+                $(this).addClass('active').siblings().removeClass('active');
+            });
+        })     
+        $(document).ready(function () {
+
+            $('input[name=filteroption][value=-1]').prop("checked", true);
+            $('input[name=filteroption][value=7]').prop("checked", true);
+            $('input[name=filteroption][value=15]').prop("checked", true);
+            $('input[name=filteroption][value=30]').prop("checked", true);   
+
+            $('label[for=-1]').addClass('agreementexpiredlable')
+            $('label[for=7]').addClass('agreementlabel-1-7-days')
+            $('label[for=15]').addClass('agreementlabel-8-15-days')
+            $('label[for=30]').addClass('agreementlabel-16-31-days')      
+
+            // agreementexpiredlable
+
+            
+
+
+            $(".filteroptionall").change(function () {  //"select all" change
+                $(".filteroption").prop('checked', $(this).prop("checked")); //change all ".checkbox" checked status
+            });
+            $('.filteroption').change(function () {
+                //uncheck "select all", if one of the listed checkbox item is unchecked
+                if (false == $(this).prop("checked")) { //if this item is unchecked
+                    $(".filteroptionall").prop('checked', false); //change "select all" checked status to false
+                }
+                //check "select all" if all checkbox items are checked
+                if ($('.filteroption:checked').length == $('.filteroption').length) {
+                    $(".filteroptionall").prop('checked', true);
+                }
+            });
+
+
+            $('#Agreementrenewal').on('shown.bs.modal', function (e) {
+                $('.date').datepicker({
+                    changeMonth: true,
+                    changeYear: true,
+                    dateFormat: 'dd-M-yy',
+                    minDate: new Date()
+                });
+                $('.date').bind('keypress', function (e) {
+                    e.stopPropagation();
+                    return false;
+                });
+            });
+
+            AssignValue();
+
+
+        }); // End of Document ready
+
+        function EnableRowColor() {
+            $("tr").click(function () {
+                $(this).addClass("selected").siblings().removeClass("selected");
+            });
+        }
+
+        function AssignValue() {
+            $("#divagreementlist").empty();
+            var reportoption = '';
+            $('input.filteroption:checkbox:checked').each(function () {
+                reportoption = reportoption + ($(this).val()) + "_";
+            })
+
+         //   alert(reportoption);
+
+            reportoption = reportoption.substring(0, reportoption.length - 1);
+
+            if (reportoption == '') {
+
+                $("#divagreementlist").empty();
+                $.toast({
+                    heading: 'Agreement',
+                    text: 'Please select the expiry option',
+                    icon: 'warning',
+                    loader: true,        // Change it to false to disable loader                           
+                    position: 'mid-center',
+                })
+                return false;
+            }
+
+              var url = "@Url.RouteUrl("AgreementExpiryStatusReport", new { ReportFilter = "ReportFilter" })"
+            url = url.replace("ReportFilter", reportoption);
+
+                $.get(url, function (data) {
+                    $("#divagreementlist").html(data);
+                    $('[data-toggle="tooltip"]').tooltip();
+                    EnableRowColor();
+                });
+
+        }
+
+         function DisplayDocument(AgreementId) {
+            $("#divfilenotfound").empty();
+             $("#DocumentUploadList").empty();
+            var url = '';
+            url = "@Url.RouteUrl("DisplayAgreementDocument", new { AgreementId = "AgreementId" })";
+            url = url.replace("AgreementId", AgreementId);
+            $.get(url, function (data) {
+                $("#DocumentUploadList").html(data);
+          });
+            $('#DocumentModal').modal('show')
+            //DocumentModal
+        }
+
+        function DisplayAgreementInfo(AgreementId) {
+         
+            $("#divdisplayAgreementInfo").empty();
+            var url = '';
+            url = "@Url.RouteUrl("DisplayAgreementInfo", new { AgreementId = "AgreementId" })";
+            url = url.replace("AgreementId", AgreementId);
+            $.get(url, function (data) {
+                $("#divdisplayAgreementInfo").html(data);
+               
+            });
+           // SetDateFormat();
+            $('#Agreementrenewal').modal('show')
+            //DocumentModal
+        }
+        function Opendocument(url) {
+            $("#divfilenotfound").empty();
+            if (isURLExists(url)) {
+                window.open(url);
+            }
+            else {
+                $("#divfilenotfound").html("<h5>File Not found</h5>")
+            }
+        }
+
+        function Uploadrenewaldocument() {
+
+
+            if (AgreementRenewalValidation() == false) {
+                return false;
+            }
+
+            // Checking whether FormData is available in browser  
+            if (window.FormData !== undefined) {
+
+                var fileUpload = $("#UploadDocuments").get(0);
+                var files = fileUpload.files;
+
+                // Create FormData object  
+                var fileData = new FormData();
+
+                // Looping over all files and add it to FormData object  
+                for (var i = 0; i < files.length; i++) {
+                    fileData.append(files[i].name, files[i]);
+                }
+
+                // Adding one more key to FormData object  
+                fileData.append('AgreementInfoId', $('#AgreementInfoId').val());
+                fileData.append('AgreementId', $('#AgreementId').val());
+                fileData.append('RenewalStartDate', $('#RenewalStartDate').val());
+                fileData.append('RenewalEndDate', $('#RenewalEndDate').val());
+                fileData.append('RenewalRentAmountPerMonth', $('#RenewalRentAmountPerMonth').val());
+                fileData.append('RenewalSecurityDeposit', $('#RenewalSecurityDeposit').val());                
+
+                $.ajax({
+                    url: '/Agreement/UpdateAgreementRenewal',
+                    type: "POST",
+                    contentType: false, // Not to set any content header  
+                    processData: false, // Not to process data  
+                    data: fileData,
+                    success: function (result) {
+                       // alert(result);
+                        $.toast({
+                            heading: 'Agreement',
+                            text: result,
+                            icon: 'success',
+                            loader: true,        // Change it to false to disable loader                           
+                            position: 'mid-center',
+                        })
+                        $('#Agreementrenewal').modal('hide')
+                        AssignValue();
+                    },
+                    error: function (err) {
+                        $.toast({
+                            heading: 'Agreement',
+                            text: err.statusText,
+                            icon: 'error',
+                            loader: true,        // Change it to false to disable loader                         
+                            position: 'mid-center',
+                        })
+                      //  alert(err.statusText);
+                    }
+                });
+            } else {
+                $.toast({
+                    heading: 'Agreement',
+                    text: "Form Data is not supported.",
+                    icon: 'error',
+                    loader: true,        // Change it to false to disable loader                         
+                    position: 'mid-center',
+                })
+                // alert("Form Data is not supported.");
+            } 
+
+            return false;
+        }
+
+        function SetDateFormat() {
+        
+            $('#RenewalStartDate, #RenewalEndDate').datepicker({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: 'dd-M-yy',
+                minDate: new Date()
+            });
+
+            //  $("#Reportfrom,#Reportto").datepicker("setDate", new Date());
+            $('#RenewalStartDate,#RenewalEndDate').bind('keypress', function (e) {
+                e.stopPropagation();
+                return false;
+            });
+
+        }
+
+        function AgreementRenewalValidation() { 
+
+            var validationresult = true;
+            clearErrMsg();
+
+            var RenewalStartDate = $("#RenewalStartDate").val();
+            var RenewalEndDate = $("#RenewalEndDate").val();
+            var RenewalRentAmountPerMonth = $("#RenewalRentAmountPerMonth").val();
+            var RenewalSecurityDeposit = $("#RenewalSecurityDeposit").val();
+
+            var ExpiredDate = moment($("#ExpiredDate").val(), "DD-MM-YYYY", false); 
+           // var ExpiredDate = moment('', "DD-MM-YYYY", false); 
+           // console.log(ExpiredDate);
+
+           
+            if (RenewalStartDate == '' || RenewalStartDate == null) {
+                $('span[data-valmsg-for="RenewalStartDate"]').text('Start date is required');
+                validationresult = false;
+            }
+
+            if (moment(RenewalStartDate, "DD-MMM-YYYY", true).isValid() == false) {
+                $('span[data-valmsg-for="RenewalStartDate"]').text('Invalid start date');
+                validationresult = false;
+            }
+
+
+            if (RenewalEndDate == '' || RenewalEndDate == null) {
+                $('span[data-valmsg-for="RenewalEndDate"]').text('End date is required');
+                validationresult = false;
+            }
+
+            if (moment(RenewalEndDate, "DD-MMM-YYYY", true).isValid() == false) {
+                $('span[data-valmsg-for="RenewalEndDate"]').text('Invalid End date');
+                validationresult = false;
+            }
+
+            var startdate = moment(RenewalStartDate, "DD-MMM-YYYY");
+            var endate = moment(RenewalEndDate, "DD-MMM-YYYY");
+           
+            if (startdate >= endate) {
+                $('span[data-valmsg-for="RenewalStartDate"]').text('Start date should not be greater than end date...');
+                validationresult = false;
+            }
+            if (ExpiredDate.isValid()) {
+                if (startdate <= ExpiredDate) {
+                    $('span[data-valmsg-for="RenewalStartDate"]').text('Start date should be greater than expired date - ' + ExpiredDate.format('DD-MM-YYYY'));
+                    validationresult = false;
+                }
+                if (endate <= ExpiredDate) {
+                    $('span[data-valmsg-for="RenewalEndDate"]').text('End date should be greater than expired date - ' + ExpiredDate.format('DD-MM-YYYY'));
+                    validationresult = false;
+                }
+            }
+        
+
+            if (RenewalRentAmountPerMonth == '' || parseFloat(RenewalRentAmountPerMonth) <= 0  || RenewalRentAmountPerMonth == null) {
+                $('span[data-valmsg-for="RenewalRentAmountPerMonth"]').text('Rent Amount is required');
+                validationresult = false;
+            }
+
+            if (RenewalSecurityDeposit == '' || parseFloat(RenewalSecurityDeposit) <= 0 || RenewalSecurityDeposit == null) {
+                $('span[data-valmsg-for="RenewalSecurityDeposit"]').text('Security Deposit Amount is required');
+                validationresult = false;
+            }
+
+            if (document.getElementById('UploadDocuments').value == '') {
+                $('span[data-valmsg-for="UploadDocuments"]').text('Documnet is not selected');
+                validationresult = false;
+            }      
+            return validationresult;
+        }
+
+        function clearErrMsg() {
+            $('span[data-valmsg-for="RenewalStartDate"]').text('')
+            $('span[data-valmsg-for="RenewalEndDate"]').text('')
+            $('span[data-valmsg-for="RenewalRentAmountPerMonth"]').text('')
+            $('span[data-valmsg-for="RenewalSecurityDeposit"]').text('')
+            $('span[data-valmsg-for="UploadDocuments"]').text('');
+        }
+
+
+    </script>
+    }

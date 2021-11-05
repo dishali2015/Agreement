@@ -1,0 +1,60 @@
+﻿@model MetroDocs.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Create a new user";
+
+    if(!Request.IsAuthenticated)
+    {
+        Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+    }   
+
+}
+    <div class="h-100 d-flex justify-content-center align-items-center">
+        <div class="border-success p-2 m-3 card" style="width:300px">
+            @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+            <h5 class="text-success text-center">Agreement Management</h5>
+                <h6 class="text-center">Create a new user</h6>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Username, new { @class = "control-label" })
+                    <span class="requiredfiled">*</span>
+                    @Html.TextBoxFor(m => m.Username, new { @class = "form-control", @maxlength = "15" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.FullName, new { @class = "control-label" })
+                    <span class="requiredfiled">*</span>
+                    @Html.TextBoxFor(m => m.FullName, new { @class = "form-control", @maxlength = "50" })
+                 
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Password, new { @class = "control-label" })
+                    <span class="requiredfiled">*</span>
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", @maxlength = "15" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.ConfirmPassword, new { @class = "control-label" })
+                    <span class="requiredfiled">*</span>
+                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @maxlength = "15" })
+                </div>
+                <div class="form-group">
+                    @Html.ValidationSummary("", new { @class = "alert-danger m-0" })
+                </div>
+                <div class="form-group">
+                    <div class="float-right">
+                        <input type="submit" class="btn btn-success" value="Register" />
+                    </div>
+                </div>
+            }
+        </div>
+
+      
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#Username").focus();
+    });
+</script>
+    }

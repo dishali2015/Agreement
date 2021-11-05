@@ -1,0 +1,48 @@
+﻿<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    @if (User.Identity.IsAuthenticated)
+    {
+        <img src="~/Content/images/your-logo.png" class="metrologosize" />
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })
+                </li>
+                @if (User.IsInRole("Admin"))
+                {
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Admin
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            @Html.ActionLink("New user", "Register", "Account", null, new { @class = "dropdown-item" })
+                            @Html.ActionLink("User & Role", "Index", "Role", null, new { @class = "dropdown-item" })
+                        </div>
+                    </li>
+                }
+
+                @if (User.IsInRole("Admin") || User.IsInRole("Sales"))
+                {
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Agreement
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            @Html.ActionLink("New Agreement", "CreateAgreement", "Agreement", null, new { @class = "dropdown-item" })
+                            @Html.ActionLink("List of Agreement", "AgreementList", "Agreement", null, new { @class = "dropdown-item" })
+                            <div class="dropdown-divider"></div>
+                            @Html.ActionLink("Agreement Expiry Status", "AgreementExpiryStatus", "Agreement", null, new { @class = "dropdown-item" })
+                        </div>
+                    </li>
+                }
+            </ul>
+            @{
+                Html.RenderAction("DisplayUserInfo", "Account");
+            }
+        </div>
+    }
+</nav>

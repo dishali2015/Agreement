@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "Register success";
+    if (!Request.IsAuthenticated)
+    {
+        Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+    }
+    //  Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+
+<style>
+    .center {
+        padding-top:50px;
+        margin: auto;
+        height: 200px;
+        width: 300px;
+        position: fixed;
+        top: 30px;     
+        left: 0;
+        right: 0;
+    }
+</style>
+
+<div class="border-success center card">
+    <div class="p-1">
+        <h6 class="text-success text-center">New user created successfully.</h6>
+    </div>
+    @Html.ActionLink("Login", "Login", "Account", null, new { @class = "btn btn-danger btn-sm" })
+</div>
+
+

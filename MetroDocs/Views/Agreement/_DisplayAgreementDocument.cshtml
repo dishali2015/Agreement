@@ -1,0 +1,17 @@
+﻿@using MetroDocs.Domain.ViewModel;
+@model List<AgreementDocumentViewModel>
+<div>
+    @if (Model != null && Model.Any())
+    {
+        foreach (var item in Model)
+        {
+            <div class="list-group">
+                <button type="button" class="m-1 btn btn-info" onclick="return Opendocument('@item.ImageURL')">@item.DisplayName</button>
+            </div>
+        }
+    }
+    else
+    {
+        <h5 class="text-danger">Agreement Document not uploaded</h5>
+    }
+</div>

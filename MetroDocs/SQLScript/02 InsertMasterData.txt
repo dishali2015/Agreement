@@ -1,0 +1,8 @@
+GO
+INSERT [dbo].[Role] ([Id], [Name]) VALUES (N'D8BD9717-EC09-46E4-88DC-FAFBAC2DCC80', N'Admin')
+GO
+INSERT [dbo].[Role] ([Id], [Name]) VALUES (N'9ff4e949-87be-43ab-af99-bef5f3fc2ee2', N'Sales')
+GO
+INSERT [dbo].[User] ([Id], [Email], [EmailConfirmed], [PasswordHash], [SecurityStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEndDateUtc], [LockoutEnabled], [AccessFailedCount], [UserName], [FullName], [Lastlogindate]) VALUES (N'f57ef286-503d-41cc-9fb2-70f0131058bf', NULL, 0, N'AK0KseTLIjyVOyuLP6ZgxSrbYymur3RX5UgcGoZPxkArf20c4o48G9523Z/85lURJw==', N'72d3149f-46cb-4a23-bdb2-f3916162baa9', NULL, 0, 0, NULL, 1, 0, N'admin', N'Administrator', CAST(N'2021-10-11T01:15:46.027' AS DateTime))
+GO
+INSERT [dbo].[UserRole] ([UserId], [RoleId]) VALUES (N'f57ef286-503d-41cc-9fb2-70f0131058bf', N'D8BD9717-EC09-46E4-88DC-FAFBAC2DCC80')

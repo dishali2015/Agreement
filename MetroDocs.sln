@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29230.47
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetroDocs", "MetroDocs\MetroDocs.csproj", "{B056DF61-5ACE-4AB2-BC55-F8E5117EA53C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetroDocs.Domain", "MetroDocs.Domain\MetroDocs.Domain.csproj", "{0C2BF83A-AB4A-44D1-A540-130E0AA0D5AB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B056DF61-5ACE-4AB2-BC55-F8E5117EA53C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B056DF61-5ACE-4AB2-BC55-F8E5117EA53C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B056DF61-5ACE-4AB2-BC55-F8E5117EA53C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B056DF61-5ACE-4AB2-BC55-F8E5117EA53C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C2BF83A-AB4A-44D1-A540-130E0AA0D5AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C2BF83A-AB4A-44D1-A540-130E0AA0D5AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C2BF83A-AB4A-44D1-A540-130E0AA0D5AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C2BF83A-AB4A-44D1-A540-130E0AA0D5AB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5A79E3B1-C147-4FC3-91D1-182340B8BA37}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,335 @@
+﻿@model MetroDocs.Domain.ViewModel.AgreementDataInputViewModel
+@{
+    ViewBag.Title = "New Agreement";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card border border-0 pt-1 pb-1 text-danger">
+            <h5>New Agreement</h5>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+        <div class="agreement pt-0 pb-3 pl-3 pr-3">
+            @using (Html.BeginForm("SaveAgreement", "Agreement",FormMethod.Post, new { enctype = "multipart/form-data", role = "form" }))
+            {
+                <div class="row">
+                    <div class="col-md-3 col-sm-3 col-lg-3 p-1">
+                        <div class="card infobox">
+                            <div class="card-header p-1 text-center">
+                                <h6>Landlord Information</h6>
+                            </div>
+                            <div class="card-body p-1">
+                                <div class="form-group p-0">
+                                    @Html.LabelFor(m => m.LandLordContact.ContactName, new { @class = "control-label p-0 m-0" })
+                                    <span class="requiredfiled">*</span>
+                                    @Html.TextBoxFor(m => m.LandLordContact.ContactName, new { @class = "form-control form-control-sm input-sm" })
+                                    @Html.ValidationMessageFor(m => m.LandLordContact.ContactName, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group p-0">
+                                    @Html.LabelFor(m => m.LandLordContact.Address1, new { @class = " control-label p-0 m-0" })
+                                    <span class="requiredfiled">*</span>
+                                    @Html.TextBoxFor(m => m.LandLordContact.Address1, new { @class = "form-control form-control-sm input-sm" })
+                                    @Html.ValidationMessageFor(m => m.LandLordContact.Address1, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group p-0">
+                                    @Html.LabelFor(m => m.LandLordContact.Address2, new { @class = "control-label p-0 m-0" })
+                                    <span class="requiredfiled">*</span>
+                                    @Html.TextBoxFor(m => m.LandLordContact.Address2, new { @class = "form-control form-control-sm input-sm" })
+                                    @Html.ValidationMessageFor(m => m.LandLordContact.Address2, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group p-0">
+                                    @Html.LabelFor(m => m.LandLordContact.Address3, new { @class = "control-label p-0 m-0" })
+
+                                    @Html.TextBoxFor(m => m.LandLordContact.Address3, new { @class = "form-control form-control-sm input-sm" })
+                                    @Html.ValidationMessageFor(m => m.LandLordContact.Address3, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group p-0">
+                                    @Html.LabelFor(m => m.LandLordContact.City, new { @class = "control-label p-0 m-0" })
+                                    <span class="requiredfiled">*</span>
+                                    @Html.TextBoxFor(m => m.LandLordContact.City, new { @class = "form-control form-control-sm" })
+                                    @Html.ValidationMessageFor(m => m.LandLordContact.City, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group p-0">
+                                    @Html.LabelFor(m => m.LandLordContact.Pincode, new { @class = "control-label p-0 m-0" })
+                                    <span class="requiredfiled">*</span>
+                                    @Html.TextBoxFor(m => m.LandLordContact.Pincode, new { @class = "form-control form-control-sm", @maxlength = "6", @onkeypress = "return isNumberKey(this,event)" })
+                                    @Html.ValidationMessageFor(m => m.LandLordContact.Pincode, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group p-0">
+                                    @Html.LabelFor(m => m.LandLordContact.EMail, new { @class = "control-label p-0 m-0" })
+
+                                    @Html.TextBoxFor(m => m.LandLordContact.EMail, new { @class = "form-control form-control-sm" })
+                                    @Html.ValidationMessageFor(m => m.LandLordContact.EMail, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group p-0">
+                                    @Html.LabelFor(m => m.LandLordContact.PhoneNumber, new { @class = "control-label p-0 m-0" })
+
+                                    @Html.TextBoxFor(m => m.LandLordContact.PhoneNumber, new { @class = "form-control form-control-sm", @maxlength = "10", @onkeypress = "return isNumberKey(this,event)" })
+                                    @Html.ValidationMessageFor(m => m.LandLordContact.PhoneNumber, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group p-0">
+                                    @Html.LabelFor(m => m.LandLordContact.MobileNumber, new { @class = "control-label p-0 m-0" })
+                                    <span class="requiredfiled">*</span>
+                                    @Html.TextBoxFor(m => m.LandLordContact.MobileNumber, new { @class = "form-control form-control-sm", @maxlength = "10", @onkeypress = "return isNumberKey(this,event)" })
+                                    @Html.ValidationMessageFor(m => m.LandLordContact.MobileNumber, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group p-0">
+                                    @Html.LabelFor(m => m.LandLordContact.PAN, new { @class = "control-label p-0 m-0" })
+                                    <span class="requiredfiled">*</span>
+                                    @Html.TextBoxFor(m => m.LandLordContact.PAN, new { @class = "form-control form-control-sm", @maxlength = "10" })
+                                    @Html.ValidationMessageFor(m => m.LandLordContact.PAN, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group p-0">
+                                    @Html.LabelFor(m => m.LandLordContact.AadharNumber, new { @class = "control-label p-0 m-0" })
+                                    <span class="requiredfiled">*</span>
+                                    @Html.TextBoxFor(m => m.LandLordContact.AadharNumber, new { @class = "form-control form-control-sm aadhar", @maxlength = "12" })
+                                    @Html.ValidationMessageFor(m => m.LandLordContact.AadharNumber, "", new { @class = "text-danger" })
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-lg-3 p-1">
+                        <div class="card infobox">
+                            <div class="card-header p-1 text-center">
+                                <h6>Tenant Information</h6>
+                            </div>
+                            <div class="card-body p-1">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.TenantContact.ContactName, new { @class = "control-label p-0 m-0" })
+                                    <span class="requiredfiled">*</span>
+                                    @Html.TextBoxFor(m => m.TenantContact.ContactName, new { @class = "form-control form-control-sm" })
+                                    @Html.ValidationMessageFor(m => m.TenantContact.ContactName, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.TenantContact.Address1, new { @class = "control-label p-0 m-0" })
+                                    <span class="requiredfiled">*</span>
+                                    @Html.TextBoxFor(m => m.TenantContact.Address1, new { @class = "form-control form-control-sm" })
+                                    @Html.ValidationMessageFor(m => m.TenantContact.Address1, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.TenantContact.Address2, new { @class = "control-label p-0 m-0" })
+                                    <span class="requiredfiled">*</span>
+                                    @Html.TextBoxFor(m => m.TenantContact.Address2, new { @class = "form-control form-control-sm" })
+                                    @Html.ValidationMessageFor(m => m.TenantContact.Address2, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.TenantContact.Address3, new { @class = "control-label p-0 m-0" })
+
+                                    @Html.TextBoxFor(m => m.TenantContact.Address3, new { @class = "form-control form-control-sm" })
+                                    @Html.ValidationMessageFor(m => m.TenantContact.Address3, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.TenantContact.City, new { @class = "control-label p-0 m-0" })
+                                    <span class="requiredfiled">*</span>
+                                    @Html.TextBoxFor(m => m.TenantContact.City, new { @class = "form-control form-control-sm" })
+                                    @Html.ValidationMessageFor(m => m.TenantContact.City, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.TenantContact.Pincode, new { @class = "control-label p-0 m-0" })
+                                    <span class="requiredfiled">*</span>
+                                    @Html.TextBoxFor(m => m.TenantContact.Pincode, new { @class = "form-control form-control-sm", @maxlength = "6", @onkeypress = "return isNumberKey(this,event)" })
+                                    @Html.ValidationMessageFor(m => m.TenantContact.Pincode, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.TenantContact.EMail, new { @class = "control-label p-0 m-0" })
+                                    @Html.TextBoxFor(m => m.TenantContact.EMail, new { @class = "form-control form-control-sm" })
+                                    @Html.ValidationMessageFor(m => m.TenantContact.EMail, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.TenantContact.PhoneNumber, new { @class = "control-label p-0 m-0" })
+
+                                    @Html.TextBoxFor(m => m.TenantContact.PhoneNumber, new { @class = "form-control form-control-sm", @maxlength = "10", @onkeypress = "return isNumberKey(this,event)" })
+                                    @Html.ValidationMessageFor(m => m.TenantContact.PhoneNumber, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.TenantContact.MobileNumber, new { @class = "control-label p-0 m-0" })
+                                    <span class="requiredfiled">*</span>
+                                    @Html.TextBoxFor(m => m.TenantContact.MobileNumber, new { @class = "form-control form-control-sm", @maxlength = "10", @onkeypress = "return isNumberKey(this,event)" })
+                                    @Html.ValidationMessageFor(m => m.TenantContact.MobileNumber, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="form-group p-0">
+                                    @Html.LabelFor(m => m.TenantContact.PAN, new { @class = "control-label p-0 m-0" })
+                                    <span class="requiredfiled">*</span>
+                                    @Html.TextBoxFor(m => m.TenantContact.PAN, new { @class = "form-control form-control-sm", @maxlength = "10" })
+                                    @Html.ValidationMessageFor(m => m.TenantContact.PAN, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group p-0">
+                                    @Html.LabelFor(m => m.TenantContact.AadharNumber, new { @class = "control-label p-0 m-0" })
+                                    <span class="requiredfiled">*</span>
+                                    @Html.TextBoxFor(m => m.TenantContact.AadharNumber, new { @class = "form-control form-control-sm aadhar", @maxlength = "12" })
+                                    @Html.ValidationMessageFor(m => m.TenantContact.AadharNumber, "", new { @class = "text-danger" })
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-lg-3 p-1">
+                        <div class="card infobox">
+                            <div class="card-header p-1 text-center">
+                                <h6>Premises Details</h6>
+                            </div>
+                            <div class="card-body p-1">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.AgreementViewModel.PremisesAddress1, new { @class = "control-label p-0 m-0" })
+                                    <span class="requiredfiled">*</span>
+                                    @Html.TextBoxFor(m => m.AgreementViewModel.PremisesAddress1, new { @class = "form-control form-control-sm" })
+                                    @Html.ValidationMessageFor(m => m.AgreementViewModel.PremisesAddress1, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.AgreementViewModel.PremisesAddress2, new { @class = "control-label p-0 m-0" })
+                                    <span class="requiredfiled">*</span>
+                                    @Html.TextBoxFor(m => m.AgreementViewModel.PremisesAddress2, new { @class = "form-control form-control-sm" })
+                                    @Html.ValidationMessageFor(m => m.AgreementViewModel.PremisesAddress2, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.AgreementViewModel.PremisesAddress3, new { @class = "control-label p-0 m-0" })
+                                 
+                                    @Html.TextBoxFor(m => m.AgreementViewModel.PremisesAddress3, new { @class = "form-control form-control-sm" })
+                                    @Html.ValidationMessageFor(m => m.AgreementViewModel.PremisesAddress3, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.AgreementViewModel.PremisesCity, new { @class = "control-label p-0 m-0" })
+                                    <span class="requiredfiled">*</span>
+                                    @Html.TextBoxFor(m => m.AgreementViewModel.PremisesCity, new { @class = "form-control form-control-sm" })
+                                    @Html.ValidationMessageFor(m => m.AgreementViewModel.PremisesCity, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.AgreementViewModel.PremisesPincode, new { @class = "control-label p-0 m-0" })
+                                    <span class="requiredfiled">*</span>
+                                    @Html.TextBoxFor(m => m.AgreementViewModel.PremisesPincode, new { @class = "form-control form-control-sm", @maxlength = "6", @onkeypress = "return isNumberKey(this,event)" })
+                                    @Html.ValidationMessageFor(m => m.AgreementViewModel.PremisesPincode, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.AgreementViewModel.PremisesDescription, new { @class = "control-label p-0 m-0" })
+                                    <span class="requiredfiled">*</span>
+                                    @Html.TextAreaFor(m => m.AgreementViewModel.PremisesDescription, new { @class = "form-control form-control-sm" , @maxlength = "750", rows="5" })
+                                    @Html.ValidationMessageFor(m => m.AgreementViewModel.PremisesDescription, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-lg-3 p-1">
+                        <div class="card infobox">
+                            <div class="card-header p-1 text-center">
+                                <h6>Agreement Details</h6>
+                            </div>
+                            <div class="card-body p-1">
+
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.AgreementInfo.StartDate, new { @class = "control-label p-0 m-0" })
+                                    <span class="requiredfiled">*</span>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fa fa-calendar-o" aria-hidden="true"></i></span>
+                                        </div>
+                                        @Html.TextBoxFor(m => m.AgreementInfo.StartDate, new { @class = "form-control form-control-sm" })
+                                    </div>
+                                    @Html.ValidationMessageFor(m => m.AgreementInfo.StartDate, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.AgreementInfo.EndDate, new { @class = "control-label p-0 m-0" })
+                                    <span class="requiredfiled">*</span>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fa fa-calendar-o" aria-hidden="true"></i></span>
+                                        </div>
+                                        @Html.TextBoxFor(m => m.AgreementInfo.EndDate, new { @class = "form-control form-control-sm" })
+                                    </div>
+                                    @Html.ValidationMessageFor(m => m.AgreementInfo.EndDate, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.AgreementInfo.RentAmountPerMonth, new { @class = "control-label p-0 m-0" })
+                                    <span class="requiredfiled">*</span>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fa fa-inr" aria-hidden="true"></i></span>
+                                        </div>
+                                        @Html.TextBoxFor(m => m.AgreementInfo.RentAmountPerMonth, new { @class = "form-control form-control-sm" })
+                                    </div>
+                                    @Html.ValidationMessageFor(m => m.AgreementInfo.RentAmountPerMonth, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.AgreementInfo.SecurityDeposit, new { @class = "control-label p-0 m-0" })
+                                    <span class="requiredfiled">*</span>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fa fa-inr" aria-hidden="true"></i></span>
+                                        </div>
+                                        @Html.TextBoxFor(m => m.AgreementInfo.SecurityDeposit, new { @class = "form-control form-control-sm" })
+                                    </div>
+                                    @Html.ValidationMessageFor(m => m.AgreementInfo.SecurityDeposit, "", new { @class = "text-danger" })
+                                </div>
+
+                             
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.AgreementInfo.PaymentMethod, new { @class = "control-label p-0 m-0" })
+                                    <span class="requiredfiled">*</span>
+                                    @Html.TextBoxFor(m => m.AgreementInfo.PaymentMethod, new { @class = "form-control form-control-sm" })
+                                    @Html.ValidationMessageFor(m => m.AgreementInfo.PaymentMethod, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.AgreementInfo.UploadDocuments, new { @class = "control-label p-0 m-0" })
+                                    <span class="requiredfiled">*</span>
+                                    @Html.TextBoxFor(m => m.AgreementInfo.UploadDocuments, new { type = "file", multiple = "multiple" })
+                                    @Html.ValidationMessageFor(m => m.AgreementInfo.UploadDocuments, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" value="Save" class="btn btn-success" />
+                                    <input type="reset" value="Reset" class="btn btn-danger" />
+                                </div>
+                                @if (ViewBag.Errmsg != null)
+                                {
+                                    <div class="form-group">
+                                        <div class="bg-danger text-white p-1">
+                                            @ViewBag.Errmsg
+                                        </div>
+                                        <div class="bg-danger text-white p-1">
+                                            @Html.ValidationSummary()
+                                        </div>
+                                    </div>
+                                }
+
+                            </div>
+                                </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var heights = $(".infobox").map(function () {
+                return $(this).height();
+            }).get(),
+                maxHeight = Math.max.apply(null, heights);
+            $(".infobox").height(maxHeight);            
+
+            $("#AgreementInfo_StartDate,#AgreementInfo_EndDate").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: 'dd-M-yy'
+            });
+            $("#AgreementInfo_StartDate,#AgreementInfo_EndDate").datepicker("setDate", new Date());
+
+            $("#AgreementInfo_StartDate, #AgreementInfo_EndDate").bind('keypress', function (e) {
+                e.stopPropagation();
+                return false;
+            });
+
+        });
+    </script>
+    }

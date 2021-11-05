@@ -1,0 +1,522 @@
+﻿body {
+   
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+   
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+/*
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+*/
+
+
+.dashboard {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    font-size: small;
+}
+
+    .dashboard td, .dashboard th {
+        border: 1px solid #808080;
+        padding: 3px;
+    }
+.registrationdate {
+    background-color: #C4E8DF;  
+}
+
+.isolve {
+    background-color: #D8F6D6;  
+}
+.sbu {
+    background-color: #EEFBDD;
+  
+}
+.credit {
+    background-color: #FFFFE6;
+   
+}
+.IT {
+    background-color: #FFEEDD;
+ 
+}
+.marketing {
+    background-color: #FFE4DD;
+    
+}
+.material {
+    background-color: #f7d97f;
+ 
+}
+.hr {
+    background-color: #D9B4E2;
+  
+}
+.admin {
+    background-color: #BEAFE1;
+    
+}
+
+.finance {
+    background-color: #EEE7D3;
+    
+}
+.packteam {
+    background-color: #EAD7C3;
+    
+}
+.training {
+    background-color: #C8D3B8;
+    
+}
+.account {
+    background-color: #8fbc8f;
+    
+}
+.bg-light {
+    background-color: #00893d!important;
+}
+
+.nav-link {
+    color: white !important;
+}
+
+.dropdown-menu {
+    background-color: #00893d!important;
+    border: 0px solid white !important;
+}
+
+.dropdown-item {
+    color: white !important;
+}
+
+    .dropdown-item:hover {
+        color: #00893d !important;
+        background-color: white !important;
+        font-weight:bold;
+    }
+
+.nav-link:hover {
+    color: #00893d !important;
+    background-color: white !important;
+    font-weight: bold;
+}
+
+.navbar-toggler {
+    width: 47px;
+    height: 34px;
+    background-color: #2088e7;
+    border: none;
+}
+
+    .navbar-toggler .line {
+        width: 100%;
+        float: left;
+        height: 2px;
+        background-color: #fff;
+        margin-bottom: 5px;
+    }
+
+.table th {
+    background-color: #05928d;
+    color: white;
+}
+.table td {
+    padding:3px!important;
+}
+.table th {
+    padding: 3px !important;
+}
+
+.fontsmall {
+    font-size: small;
+}
+
+    .fontsmall td {
+        padding: 8px !important;
+    }
+
+#myTab li a {
+    border-color: #00893d;
+    background-color: #00893d;
+    padding: 3px;
+    margin: 2px;
+}
+
+.my-tab .tab-pane {
+    border: solid 1px deeppink !important;
+}
+
+#myTab li.active a {
+    background-color: white !important;
+    border: solid 1px #00893d !important;
+    color: #00893d !important;
+}
+
+.my-tab .tab-pane {
+    border: solid 1px blue;
+    border-top: 0;
+}
+
+.approve {
+    color: green;
+    font-weight: bold;
+}
+
+.reject {
+    color: red;
+    font-weight: bold;
+}
+
+.pending {
+    color: blue;
+    font-weight: bold;
+}
+/*
+.sales td {
+    background-color: #7c7cf3!important;
+    color: white;
+}
+.received td {
+    background-color: #8dc48d !important;
+    color: white;
+}
+.balance {
+    background-color: #ed97cb !important;
+    color: white;
+}
+    */
+
+.requiredfiled {
+    color: red;
+}
+
+.control-label {
+    color: blue;
+    font-size: medium;
+    font-weight: bold;
+}
+
+.text-box, .form-control {
+    border: 1px solid blue;
+}
+
+    .form-control:focus {
+        border: 2px solid blue;
+        box-shadow: none;
+    }
+
+.ui-autocomplete {
+    overflow: auto;
+    max-height: 300px;
+}
+
+    .ui-autocomplete .ui-menu-item {
+        font-size: small;
+    }
+
+.CollectionAmount {
+    color: red;
+}
+
+.txtpaymentdetail {
+    width: 140px !important;
+    max-width: 140px !important;
+}
+
+.CreateRole {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.userrole {
+    max-height: 450px;
+    overflow-y: auto;
+    max-width: 99%;
+}
+
+.lablehind {
+    font-size: smaller;
+    display: block;
+}
+
+.materialname {
+    width: auto;
+    white-space: nowrap;
+}
+
+.materialquantity {
+    width: 50px !important;
+    text-align: center;
+}
+
+.table-fit {
+    width: 1px;
+}
+
+.closurematerialheight {
+    height: 450px;
+    overflow-y: auto;
+}
+
+.Red td {
+    background-color: #ff9999 !important;
+}
+
+.Green td {
+    background-color: #99ffbb !important;
+}
+
+.WIP td {
+    background-color: #ffc299 !important;
+}
+
+.patient {
+    width: 80px !important;
+    max-width: 80px !important;
+    background-color: gold;
+}
+.calstd {
+    width: 80px !important;
+    max-width: 80px !important;
+    background-color: gold;
+}
+.con {
+    width: 80px !important;
+    max-width: 80px !important;
+    background-color: gold;
+}
+.recheck {
+    width: 80px !important;
+    max-width: 80px !important;
+    background-color: gold;
+}
+.wastage {
+    width: 80px !important;
+    max-width: 80px !important;
+    background-color: gold;
+}
+.pooling {
+    width: 80px !important;
+    max-width: 80px !important;
+    background-color: #FF69B4;
+}
+
+.kuiinput {
+    width: 80px !important;
+    max-width: 80px !important;
+    background-color: gold;
+}
+
+.kuitotal[readonly] {
+    width: 90px !important;
+    max-width: 90px !important;
+    background-color: burlywood;
+}
+
+.kuiachieved[readonly] {
+    width: 100px !important;
+    max-width: 100px !important;
+    background-color: #fb7878;
+}
+
+.kuitarget {
+    width: 60px !important;
+    max-width: 60px !important;
+    background-color: darkkhaki;
+}
+
+.MaterialCode {
+    width: 100px !important;
+}
+
+.kuitable {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    font-size: small;
+}
+
+    .kuitable th {
+        background-color: #036d6a;
+        padding: 8px !important;
+        text-align: center;
+        color: white !important;
+    }
+
+    .kuitable td, .kuitable th {
+        border: 1px solid #d7e4bc;
+        padding: 0px;
+        text-align: center;
+    }
+
+.nowrap {
+    white-space: nowrap;
+}
+
+.radiobuttonlist {
+    height: 50px;
+    width: 250px;
+    overflow-y: auto;
+}
+
+
+.paymet-collection-list {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    font-size: small;
+}
+
+    .paymet-collection-list th {
+        color: white;
+        border: 1px solid #ffecb3;
+        background-color: #F79646;
+        padding: 5px;
+    }
+
+    .paymet-collection-list td {
+        border: 1px solid #ffecb3;
+        padding: 2px;
+    }
+
+    .paymet-collection-list tr:nth-child(even) {
+        background-color: #FDE9D9;
+    }
+
+    .paymet-collection-list tr:nth-child(odd) {
+        background-color: #F6F6FF;
+    }
+
+.agreement {
+    height: 450px;
+    overflow: auto;
+    border: 0px solid red;
+    width: 99.8% !important;
+    padding: 5px;
+    background-color:lightgray;
+}
+
+.agreementexpired {
+    background-color: #DC143C !important;
+}
+
+.agreement-1-7-days {
+    background-color: #1E90FF !important;
+}
+.agreement-8-15-days {
+    background-color: #FF69B4!important;
+}
+
+.agreement-16-31-days {
+    background-color: #6A5ACD !important;
+}
+
+.agreementexpiredlable {
+    color: #DC143C !important;
+    font-weight:bold;
+}
+.agreementlabel-1-7-days {
+    color: #1E90FF !important;
+    font-weight: bold;
+}
+
+.agreementlabel-8-15-days {
+    color: #FF69B4 !important;
+    font-weight: bold;
+}
+
+.agreementlabel-16-31-days {
+    color: #6A5ACD !important;
+    font-weight: bold;
+}
+.ui-datepicker {
+    z-index: 9999 !important;
+}
+
+.agreement-list {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    font-size: small;
+}
+
+    .agreement-list th {
+        color: white;
+        border: 1px solid #ffecb3;
+        background-color: #F79646;
+        padding: 5px;
+    }
+
+    .agreement-list td {
+        border: 1px solid #ffecb3;
+        padding: 2px;
+    }
+
+    .agreement-list tr:hover {
+        background-color: #ce5331;
+    }
+
+tr.selected {
+    background-color: #ce5331;
+}
+
+.button-renewal {
+    color:white;
+    background-color: #F79646;
+    border-color: #F79646;
+}
+
+.button-history {
+    color: white;
+    background-color: #6A5ACD;
+    border-color: #6A5ACD;
+}
+
+.dashboardHome {
+    max-height:750px;
+    width:98%;
+}
+.badge-pink {
+    background-color:deeppink;
+}
+.not-allowed {
+    cursor: not-allowed !important;
+}
+
+.reportbuttonsize {
+     width:70px;
+}
+
+.autoscrollx {
+    overflow-x:auto;
+}
+.autoscrolly {
+    overflow-y: auto;
+}
+.metrologosize {
+     width:5%;
+     height:5%;
+}
+.copyright {
+     font-family:Verdana;
+     font-size:xx-small;
+}
+.activecustomer {
+    background-color:green!important;
+    color:white!important;
+}

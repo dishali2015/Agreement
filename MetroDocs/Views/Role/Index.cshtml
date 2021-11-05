@@ -1,0 +1,93 @@
+﻿@using MetroDocs.Models;
+@model ICollection<RoleAndUserList>
+@{
+    ViewBag.Title = "User & Role Management";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    <div class="row">
+        <div class="col-3">
+            <div class="p-1">
+                <h6>Roles</h6>
+                <div>
+                    @{
+                        Html.RenderAction("CreateRole");
+                    }
+                </div>
+                <div id="accordion" class="CreateRole">
+                    <table class="table table-bordered table-striped p-0">
+                        <tr>
+                            <th class="p-sm-1">
+                                Role
+                            </th>
+                            <th class="p-sm-1">
+
+                            </th>
+                        </tr>
+                        <tbody>
+                            @{ if (Model != null && Model.Any())
+                                {
+                                    var roles = Model.Select(r => r.RoleName).Distinct().ToList();
+                                    foreach (string role in roles)
+                                    {
+                                        <tr>
+                                            <td class="p-sm-1">@role</td>
+                                            <td class="p-sm-1"> @Html.ActionLink("Remove", "DeleteRole", "Role", new { RoleName = role }, new { @class = "btn btn-sm btn-danger disabled" })</td>
+                                        </tr>
+                                    }
+                                }
+                            }
+                        </tbody>
+                    </table>
+                   
+                </div>
+            </div>
+        </div>
+        <div class="col-9">
+            <h6>User and Roles</h6>
+            <div id="roledetails" class="userrole">
+                @{
+                    Html.RenderAction("UserAndRole");
+                }
+            </div>
+        </div>
+    </div>
+}
+<div id="wait" style="display: none; width: 100%; height: 100%; top: 100px; left: 0px; position: fixed; z-index: 10000; text-align: center;">
+    <img src='@Url.Content("~/Content/images/ConventionalOblongFairybluebird-small.gif")' width="200" height="200" alt="Loading..." style="position: fixed; top: 50%; left: 50%;" />
+</div>
+
+@section scripts {
+    <script src="@Url.Content("~/scripts/ReportHeaderFilter.js")"></script>
+    <script type="text/javascript">
+
+    function UpdateUserRole(rolebox, user, role) {
+        var roleurl = '';
+        if (rolebox.checked == true) {
+             roleurl = "@Url.RouteUrl("AddUserToRole", new { UserID = "user", RoleName = "role" })";
+             roleurl = roleurl.replace("user",user).replace("role",role)
+        } else {
+            roleurl = "@Url.RouteUrl("RemoveUserFromRole", new { UserID = "user", RoleName = "role" })";
+            roleurl = roleurl.replace("user",user).replace("role",role)
+        }
+      //  alert(roleurl);
+        //return false;
+        $.ajax({
+            type: "GET",
+            url: roleurl,
+            contentType: "application/json; charset=utf-8",
+            dataType: "html",
+            success: function (response) {              
+                $("#roledetails").html(response);
+            },
+            failure: function (response) {
+                alert(response.responseText);
+            },
+            error: function (response) {
+                alert(response.responseText);
+            }
+        });
+    }
+
+    </script>
+}

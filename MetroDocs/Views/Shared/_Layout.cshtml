@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/png" href="https://www.metropolisindia.com/favicon.png">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @RenderSection("ReportHeaderFilterCSS", false)
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="container-fluid" id="menu">
+        @Html.Partial("_Metromenu")
+    </div>
+    <div class="container-fluid autoscrollx autoscrolly p-0" id="maincontent" style="width:97.5%;">
+        @RenderBody()
+    </div>
+    <div class="container-fluid fixed-bottom bg-light text-center"><span class="text-white copyright">&#169; DTech Solution 2021</span></div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryTableToExcel")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("form").attr('autocomplete', 'off');
+            $("input").attr('autocomplete', 'off');
+
+            $("textarea[maxlength]").on("propertychange input", function () {
+                if (this.value.length > this.maxlength) {
+                    this.value = this.value.substring(0, this.maxlength);
+                }
+            });
+            resizeDiv();
+        })
+
+        function CopyToClipboard(containerid) {
+            if (document.selection) {
+                var range = document.body.createTextRange();
+                range.moveToElementText(document.getElementById(containerid));
+                range.select().createTextRange();
+                document.execCommand("copy");
+            } else if (window.getSelection) {
+                var range = document.createRange();
+                range.selectNode(document.getElementById(containerid));
+                window.getSelection().addRange(range);
+                document.execCommand("copy");
+                window.getSelection().removeAllRanges();// to deselect
+            }
+        }
+
+        function isNumberKey(txtcontrol, evt) {
+            var charCode = (evt.which) ? evt.which : event.keyCode;
+            if (charCode == 46 && $(txtcontrol).val().indexOf('.') == -1)
+                return true;
+            if (charCode > 31 && (charCode < 48 || charCode > 57))
+                return false;
+
+            return true;
+        }
+
+        $(".nav a").on("click", function () {
+            $(".nav").find(".active").removeClass("active");
+            $(this).parent().addClass("active");
+        });
+
+        $(".numericwithdecimal").keypress(function (e) {
+            if (e.which == 46 && $(this).val().indexOf('.') > -1)
+                return false;
+            else if (e.which == 45 && $(this).val().indexOf('-') > -1)
+                return false;
+            else if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57) && e.which != 46 && e.which != 45) {
+                return false;
+            }
+        });
+
+        function isURLExists(URL) {
+            var result = false;
+            $.get({
+                url: URL,
+                async: false
+            }).done(function () {
+                result = true;
+            }).fail(function () {
+                result = false;
+            })
+            return result;
+        }
+        window.onresize = function (event) {
+            resizeDiv();
+        }
+
+        function resizeDiv() {
+            var menuheight = $("#menu").innerHeight();
+            var footerheight = $("#footer").innerHeight();
+            vpw = $(window).width();
+            vph = $(window).height() - menuheight - 25;
+            // alert($(window).height());
+            // $("#maincontent").css({ "height": 400 + "px" });
+            $("#maincontent").css({ "height": vph + "px" });
+        }
+    </script>
+
+
+</body>
+</html>

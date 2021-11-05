@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "Customer Onboarding";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">            
+                @{
+                    Html.RenderAction("Dashboard", "Home");
+                }       
+        </div>      
+    </div>   
+ </div>
+
+
+@section scripts
+{
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();           
+        });
+
+    </script>
+}

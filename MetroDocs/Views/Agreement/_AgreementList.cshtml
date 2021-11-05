@@ -1,0 +1,93 @@
+﻿@using MetroDocs.Domain.ViewModel;
+@using System.Globalization;
+@model List<AgreementList>
+@{
+    Layout = null;
+}
+
+@if (Model != null && Model.Any())
+{
+    <div class="d-sm-block font-weight-bold">Total Records <span class="badge badge-success font-weight-bold">@Model.Count</span></div>
+    <table class="paymet-collection-list">
+        <tr>
+            <th class="text-center">Sl.No.</th>
+            <th class="text-center">
+                Address 1
+            </th>
+            <th class="text-center">
+                Address 2
+            </th>
+            <th class="text-center">
+                Address 3
+            </th>
+            <th class="text-center">City</th>
+            <th class="text-center">Deposit</th>
+            <th class="text-center">Rent Amount Per Month</th>
+            <th class="text-center">Start Date</th>
+            <th class="text-center">End Date</th>
+            <th class="text-center">Entry Date</th>
+            <th class="text-center">User Name</th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td class="text-center">@item.SlNo</td>
+                <td>
+                    @item.PremisesAddress1
+                </td>
+                <td>
+                    @item.PremisesAddress2
+                </td>
+                <td>
+                    @item.PremisesAddress3
+                </td>
+                <td>@item.PremisesCity</td>
+                <td class="text-right nowrap">
+                    @(item.SecurityDeposit.ToString("N", CultureInfo.CreateSpecificCulture("en-IN")))
+                </td>
+                <td class="text-right nowrap">
+                    @(item.RentAmountPerMonth.ToString("N", CultureInfo.CreateSpecificCulture("en-IN")))
+                </td>
+
+                <td class="text-center nowrap">
+                    @(@item.StartDate.ToString("dd-MMM-yyyy"))
+                </td>
+                <td class="text-center nowrap">
+                    @(@item.EndDate.ToString("dd-MMM-yyyy"))
+                </td>
+                <td class="text-center nowrap">
+                    @(@item.EntryDate.ToString("dd-MMM-yyyy HH:mm:ss"))
+                </td>
+                <td class="text-center nowrap">
+                    @item.UserName
+                </td>
+                <td class="text-center nowrap">
+                    <a href="#" class="btn btn-danger btn-sm" title="Click to open the document" data-toggle="tooltip" onclick="return DisplayDocument(@item.AgreementId)" ><i class="fa fa-file-image-o"></i></a>
+                </td>
+                <td>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a href="@Url.RouteUrl("AgreementEdit", new { AgreementId = item.AgreementId})" class="btn btn-info btn-sm">Edit</a>
+                    }
+                    else
+                    {
+                        <a href="#" class="btn btn-info btn-sm disabled">Edit</a>
+                    }
+
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="col-12 col-md-12 bg-danger text-white text-center p-2">
+        <h5>No record found</h5>
+    </div>
+}
+
+

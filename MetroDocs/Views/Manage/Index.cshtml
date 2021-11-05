@@ -1,0 +1,30 @@
+﻿@model MetroDocs.Models.IndexViewModel
+@{
+    ViewBag.Title = "Manage";
+}
+<div class="row">
+    <div class="col-4 offset-4 border border-info mt-4">
+        <p class="text-success">@ViewBag.StatusMessage</p>
+        <div>
+            <h4>Change your account settings</h4>
+            <hr />
+            <dl class="dl-horizontal">
+              
+                <dd>                    
+                    @if (Model.HasPassword)
+                    {
+                        @Html.ActionLink("Change your password", "ChangePassword")
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Create", "SetPassword")
+                    }
+                   
+                </dd>    
+            </dl>
+        </div>
+
+    </div>
+</div>
+
+       

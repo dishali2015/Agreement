@@ -1,0 +1,34 @@
+﻿@using MetroDocs.Models;
+@model List<UserItem>
+@{
+
+    Layout = null;
+}
+@{
+    if (Model != null && Model.Any())
+    {
+        var _roles = Model.FirstOrDefault().UserRole;
+        <table class="table table-bordered table-striped">
+            <tr>
+                <th class="p-sm-1">User</th>
+                @foreach (var r in _roles)
+                {
+                    <th class="p-sm-1">@r.Display</th>
+                }
+            </tr>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td class="p-sm-1 text-nowrap">@user.FullName</td>
+                    @foreach (var role in user.UserRole)
+                    {
+                        <td class="p-sm-1 text-center">
+                            @Html.CheckBox(role.Display, role.IsChecked, new { @class = "input-control", onclick = string.Format("UpdateUserRole(this,'{0}','{1}')", user.UserID, role.Display) })
+                        </td>
+                    }
+                </tr>
+            }
+        </table>
+    }
+
+}
